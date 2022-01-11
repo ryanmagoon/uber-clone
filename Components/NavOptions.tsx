@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { Image, View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import tw from 'tailwind-react-native-classnames'
 
+// TODO figure out why the screen values are typed as strings instead of their own value
 const data = [
   {
     id: '123',
@@ -15,7 +17,7 @@ const data = [
     id: '456',
     title: 'Order food',
     image: 'https://links.papareact.com/28w',
-    screen: 'EatsScreen',
+    screen: 'HomeScreen',
   },
 ]
 
@@ -28,7 +30,7 @@ const NavOptions = () => {
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
-          onPress={() => navigate(item.screen)}
+          onPress={() => navigate(item.screen as 'MapScreen' | 'HomeScreen')}
           style={tw`p-2 pl-6 pb-8 bg-gray-200 m-2 w-40`}
         >
           <View>

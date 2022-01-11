@@ -9,7 +9,18 @@ import HomeScreen from './screens/HomeScreen'
 import { store } from './store'
 import MapScreen from './screens/MapScreen'
 
-const Stack = createStackNavigator()
+type StackParamList = {
+  HomeScreen: undefined
+  MapScreen: undefined
+}
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends StackParamList {}
+  }
+}
+
+const Stack = createStackNavigator<StackParamList>()
 
 export default function App() {
   return (
