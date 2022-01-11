@@ -9,18 +9,25 @@ import HomeScreen from './screens/HomeScreen'
 import { store } from './store'
 import MapScreen from './screens/MapScreen'
 
-export default function App() {
-  const Stack = createStackNavigator()
+const Stack = createStackNavigator()
 
+export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
         <SafeAreaProvider>
           <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Map" component={MapScreen} />
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MapScreen"
+              component={MapScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
-          <HomeScreen />
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>
