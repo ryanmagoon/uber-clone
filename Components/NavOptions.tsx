@@ -3,7 +3,9 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { Image, View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
+import { useSelector } from 'react-redux'
 import tw from 'tailwind-react-native-classnames'
+import { selectOrigin } from '../slices/navSlice'
 
 // TODO figure out why the screen values are typed as strings instead of their own value
 const data = [
@@ -23,6 +25,8 @@ const data = [
 
 const NavOptions = () => {
   const { navigate } = useNavigation()
+  const origin = useSelector(selectOrigin)
+
   return (
     <FlatList
       horizontal
@@ -32,8 +36,9 @@ const NavOptions = () => {
         <TouchableOpacity
           onPress={() => navigate(item.screen as 'MapScreen' | 'HomeScreen')}
           style={tw`p-2 pl-6 pb-8 bg-gray-200 m-2 w-40`}
+          disabled={!origin}
         >
-          <View>
+          <View style={tw`${!origin ? 'opacity-20' : ''}`}>
             <Image
               style={{ width: 120, height: 120, resizeMode: 'contain' }}
               source={{ uri: item.image }}

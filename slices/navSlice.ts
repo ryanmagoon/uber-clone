@@ -1,7 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {
+  GooglePlaceData,
+  GooglePlaceDetail,
+} from 'react-native-google-places-autocomplete'
 import { RootState } from '../store'
 
-const initialState = {
+type state = {
+  origin: {
+    location: GooglePlaceDetail['geometry']['location']
+    description?: string
+  } | null
+  destination: number | null
+  travelTimeInformation: string | null
+}
+
+const initialState: state = {
   origin: null,
   destination: null,
   travelTimeInformation: null,
