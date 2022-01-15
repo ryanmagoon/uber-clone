@@ -12,6 +12,9 @@ import tw from 'tailwind-react-native-classnames'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { MapStackParamList } from '../screens/MapScreen'
+import { createSelectorCreator } from 'reselect'
+import { selectTravelTimeInformation } from '../slices/navSlice'
+import { useSelector } from 'react-redux'
 
 const data = [
   {
@@ -34,15 +37,18 @@ const data = [
   },
 ]
 
+const SURGE_CHARGE_RATE = 1.5
+
 const RideOptionsCard = () => {
   const { navigate } = useNavigation<StackNavigationProp<MapStackParamList>>()
   const [selected, setSelected] = useState<typeof data[0]>()
+  const travelTimeInformation = useSelector(selectTravelTimeInformation)
 
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <TouchableOpacity
         onPress={() => navigate('NavigateCard')}
-        style={[tw`absolute top-5 left-5 rounded-full`, { zIndex: 1 }]}
+        style={[tw`absolute top-3 left-5 rounded-full`, { zIndex: 1 }]}
       >
         <Icon
           name="chevron-left"
@@ -50,7 +56,9 @@ const RideOptionsCard = () => {
           tvParallaxProperties={null}
         />
       </TouchableOpacity>
-      <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
+      <Text style={tw`text-center py-5 text-xl`}>
+        Select a Ride - {travelTimeInformation?.distance?.text}
+      </Text>
 
       <FlatList
         data={data}
@@ -72,9 +80,19 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{name}</Text>
-              <Text>Travel time...</Text>
+              <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
             </View>
-            <Text style={tw`text-xl`}>$99</Text>
+            <Text style={tw`text-xl`}>
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              }).format(
+                (travelTimeInformation?.duration?.value *
+                  SURGE_CHARGE_RATE *
+                  multiplier) /
+                  100
+              )}
+            </Text>
           </TouchableOpacity>
         )}
       />

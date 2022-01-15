@@ -14,7 +14,16 @@ type state = {
     location: GooglePlaceDetail['geometry']['location']
     description?: string
   } | null
-  travelTimeInformation: string | null
+  travelTimeInformation: {
+    distance?: {
+      text: string
+      value: number
+    }
+    duration?: {
+      text: string
+      value: number
+    }
+  } | null
 }
 
 const initialState: state = {
