@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
-import { FlatList, Image, SafeAreaView, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { Icon } from 'react-native-elements'
 import tw from 'tailwind-react-native-classnames'
 import { useNavigation } from '@react-navigation/native'
@@ -36,14 +42,13 @@ const RideOptionsCard = () => {
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <TouchableOpacity
         onPress={() => navigate('NavigateCard')}
-        style={tw`absolute top-3 left-5 rounded-full`}
+        style={[tw`absolute top-5 left-5 rounded-full`, { zIndex: 1 }]}
       >
         <Icon
           name="chevron-left"
           type="fontawesome"
           tvParallaxProperties={null}
         />
-        <Text style={tw`text-gray-600 text-sm`}>Back</Text>
       </TouchableOpacity>
       <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
 
