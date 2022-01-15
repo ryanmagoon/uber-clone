@@ -10,7 +10,10 @@ type state = {
     location: GooglePlaceDetail['geometry']['location']
     description?: string
   } | null
-  destination: number | null
+  destination: {
+    location: GooglePlaceDetail['geometry']['location']
+    description?: string
+  } | null
   travelTimeInformation: string | null
 }
 

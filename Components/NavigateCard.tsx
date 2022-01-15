@@ -12,6 +12,7 @@ import { setDestination } from '../slices/navSlice'
 
 const NavigateCard = () => {
   const dispatch = useDispatch()
+
   const { navigate } = useNavigation<StackNavigationProp<MapStackParamList>>()
 
   return (
