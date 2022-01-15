@@ -3,9 +3,9 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
 
-import Map from '../Components/Map'
-import NavigateCard from '../Components/NavigateCard'
-import RideOptionsCard from '../Components/RideOptionsCard'
+import Map from '../components/Map'
+import NavigateCard from '../components/NavigateCard'
+import RideOptionsCard from '../components/RideOptionsCard'
 
 export type MapStackParamList = {
   NavigateCard: undefined
